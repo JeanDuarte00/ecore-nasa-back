@@ -1,0 +1,20 @@
+server:
+    port: 8989
+
+spring:
+    application:
+        name: nasa
+    jpa:
+        generate-ddl: true
+        jdbc:
+            repositories:
+                enabled: false
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+    datasource:
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: devzauro
+        password: password

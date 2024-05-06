@@ -1,0 +1,6 @@
+#
+# COLUMN pl_name:        Planet Name
+# COLUMN hostname:       Host Name
+# COLUMN discoverymethod: Discovery Method
+# COLUMN disc_year:      Discovery Year
+#

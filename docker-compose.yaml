@@ -1,0 +1,41 @@
+version: '3.8'
+
+
+services:
+
+  postgres:
+    image: postgres:16.0
+    container_name: postgres_database
+    restart: unless-stopped
+    env_file:
+      - ./environments/dev.env
+    deploy:
+      resources:
+        limits:
+          cpus: "0.3"
+          memory: 1G
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 1m30s
+      timeout: 10s
+      start_period: 10s
+      retries: 3
+    ports:
+      - "5432:5432"
+
+  adminer:
+    image: adminer
+    container_name: adminer_ui
+    restart: unless-stopped
+    env_file:
+      - ./environments/dev.env
+    deploy:
+      resources:
+        limits:
+          cpus: "0.1"
+          memory: 50M
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
